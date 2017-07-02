@@ -8,15 +8,21 @@
 
 import UIKit
 
+struct Rectangle: Codable {
+    var width: CGFloat
+    var height: CGFloat
+}
+
 class Document: UIDocument {
+    var rectangle = Rectangle(width: 0.0, height: 0.0)
     
     override func contents(forType typeName: String) throws -> Any {
-        // Encode your document with an instance of NSData or NSFileWrapper
-        return Data()
+        return try JSONEncoder().encode(rectangle)
     }
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
-        // Load your document from contents
+        guard let data = contents as? Data else { return }
+        rectangle = try JSONDecoder().decode(Rectangle.self, from: data)
     }
 }
 
