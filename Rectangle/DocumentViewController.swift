@@ -10,9 +10,10 @@ import UIKit
 
 class DocumentViewController: UIViewController {
     
-    @IBOutlet weak var documentNameLabel: UILabel!
+    var document: Document?
     
-    var document: UIDocument?
+    @IBOutlet weak var widthSlider: UISlider!
+    @IBOutlet weak var heightSlider: UISlider!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,7 +22,9 @@ class DocumentViewController: UIViewController {
         document?.open(completionHandler: { (success) in
             if success {
                 // Display the content of the document, e.g.:
-                self.documentNameLabel.text = self.document?.fileURL.lastPathComponent
+                self.navigationItem.title = self.document?.fileURL.lastPathComponent
+                self.widthSlider.value = self.document?.rectangle.width ?? 0.0
+                self.heightSlider.value = self.document?.rectangle.height ?? 0.0
             } else {
                 // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
             }
@@ -32,5 +35,13 @@ class DocumentViewController: UIViewController {
         dismiss(animated: true) {
             self.document?.close(completionHandler: nil)
         }
+    }
+    @IBAction func widthSliderValueChanged(_ sender: Any) {
+        self.document?.rectangle.width = self.widthSlider.value
+        self.document?.updateChangeCount(.done)
+    }
+    @IBAction func heightSliderValueChanged(_ sender: Any) {
+        self.document?.rectangle.height = self.heightSlider.value
+        self.document?.updateChangeCount(.done)
     }
 }

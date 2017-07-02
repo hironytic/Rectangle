@@ -7,10 +7,9 @@
 //
 
 import UIKit
-
+import os.log
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +56,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
+        os_log("error %@", error?.localizedDescription ?? "")
+        
         // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
     }
     
@@ -64,11 +65,12 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     
     func presentDocument(at documentURL: URL) {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let documentViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! DocumentViewController
+        let storyBoard = UIStoryboard(name: "Editor", bundle: nil)
+        let navViewController = storyBoard.instantiateInitialViewController() as! UINavigationController
+        let documentViewController = navViewController.topViewController as! DocumentViewController
         documentViewController.document = Document(fileURL: documentURL)
         
-        present(documentViewController, animated: true, completion: nil)
+        present(navViewController, animated: true, completion: nil)
     }
 }
 

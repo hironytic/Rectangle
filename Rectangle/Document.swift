@@ -9,8 +9,8 @@
 import UIKit
 
 struct Rectangle: Codable {
-    var width: CGFloat
-    var height: CGFloat
+    var width: Float
+    var height: Float
 }
 
 class Document: UIDocument {

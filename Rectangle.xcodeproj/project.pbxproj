@@ -15,6 +15,7 @@
 		5052FCF21F088003001CC326 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5052FCF11F088003001CC326 /* Assets.xcassets */; };
 		5052FCF51F088003001CC326 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5052FCF31F088003001CC326 /* LaunchScreen.storyboard */; };
 		5052FCFD1F0884A5001CC326 /* BlankFile.rect in Resources */ = {isa = PBXBuildFile; fileRef = 5052FCFC1F0884A5001CC326 /* BlankFile.rect */; };
+		5052FCFF1F0934DF001CC326 /* Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5052FCFE1F0934DF001CC326 /* Editor.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5052FCF41F088003001CC326 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5052FCF61F088003001CC326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5052FCFC1F0884A5001CC326 /* BlankFile.rect */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlankFile.rect; sourceTree = "<group>"; };
+		5052FCFE1F0934DF001CC326 /* Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Editor.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				5052FCEA1F088003001CC326 /* DocumentViewController.swift */,
 				5052FCEC1F088003001CC326 /* Document.swift */,
 				5052FCEE1F088003001CC326 /* Main.storyboard */,
+				5052FCFE1F0934DF001CC326 /* Editor.storyboard */,
 				5052FCF11F088003001CC326 /* Assets.xcassets */,
 				5052FCF31F088003001CC326 /* LaunchScreen.storyboard */,
 				5052FCF61F088003001CC326 /* Info.plist */,
@@ -133,6 +136,7 @@
 			files = (
 				5052FCF51F088003001CC326 /* LaunchScreen.storyboard in Resources */,
 				5052FCF21F088003001CC326 /* Assets.xcassets in Resources */,
+				5052FCFF1F0934DF001CC326 /* Editor.storyboard in Resources */,
 				5052FCFD1F0884A5001CC326 /* BlankFile.rect in Resources */,
 				5052FCF01F088003001CC326 /* Main.storyboard in Resources */,
 			);
