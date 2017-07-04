@@ -21,29 +21,39 @@ class DocumentViewController: UIViewController {
         previewView.layer.borderWidth = 1
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Access the document
-        document?.open(completionHandler: { (success) in
+    func setDocument(_ document: Document, completion: @escaping (Bool) -> Void) {
+        document.open { (success) in
             if success {
-                // Display the content of the document, e.g.:
-                self.navigationItem.title = self.document?.fileURL.lastPathComponent
-                
-                let width = self.document?.rectangle.width ?? 0
-                let height = self.document?.rectangle.height ?? 0
-                self.widthSlider.value = width
-                self.heightSlider.value = height
-                self.previewView.bounds = CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height))
-            } else {
-                // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+                self.document = document
             }
-        })
+            completion(success)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let doc = document {
+            // Display the content of the document, e.g.:
+            navigationItem.title = doc.fileURL.lastPathComponent
+            
+            let width = doc.rectangle.width
+            let height = doc.rectangle.height
+            widthSlider.value = width
+            heightSlider.value = height
+            previewView.bounds = CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height))
+        }
+        
+        super.viewDidAppear(animated)
     }
     
     @IBAction func dismissDocumentViewController() {
-        dismiss(animated: true) {
-            self.document?.close(completionHandler: nil)
+        if let doc = document {
+            doc.close { (success) in
+                if success {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
         }
     }
     @IBAction func widthSliderValueChanged(_ sender: Any) {

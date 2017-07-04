@@ -68,9 +68,12 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         let storyBoard = UIStoryboard(name: "Editor", bundle: nil)
         let navViewController = storyBoard.instantiateInitialViewController() as! UINavigationController
         let documentViewController = navViewController.topViewController as! DocumentViewController
-        documentViewController.document = Document(fileURL: documentURL)
         
-        present(navViewController, animated: true, completion: nil)
+        documentViewController.setDocument(Document(fileURL: documentURL)) { (success) in
+            if success {
+                self.present(navViewController, animated: true, completion: nil)
+            }
+        }
     }
 }
 
