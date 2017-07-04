@@ -12,8 +12,14 @@ class DocumentViewController: UIViewController {
     
     var document: Document?
     
+    @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var widthSlider: UISlider!
     @IBOutlet weak var heightSlider: UISlider!
+    
+    override func viewDidLoad() {
+        previewView.layer.borderColor = UIColor.black.cgColor
+        previewView.layer.borderWidth = 1
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,8 +29,12 @@ class DocumentViewController: UIViewController {
             if success {
                 // Display the content of the document, e.g.:
                 self.navigationItem.title = self.document?.fileURL.lastPathComponent
-                self.widthSlider.value = self.document?.rectangle.width ?? 0.0
-                self.heightSlider.value = self.document?.rectangle.height ?? 0.0
+                
+                let width = self.document?.rectangle.width ?? 0
+                let height = self.document?.rectangle.height ?? 0
+                self.widthSlider.value = width
+                self.heightSlider.value = height
+                self.previewView.bounds = CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height))
             } else {
                 // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
             }
@@ -37,11 +47,15 @@ class DocumentViewController: UIViewController {
         }
     }
     @IBAction func widthSliderValueChanged(_ sender: Any) {
-        self.document?.rectangle.width = self.widthSlider.value
-        self.document?.updateChangeCount(.done)
+        let width = self.widthSlider.value
+        document?.rectangle.width = width
+        previewView.bounds = CGRect(x: 0, y: 0, width: CGFloat(width), height: previewView.bounds.size.height)
+        document?.updateChangeCount(.done)
     }
     @IBAction func heightSliderValueChanged(_ sender: Any) {
-        self.document?.rectangle.height = self.heightSlider.value
-        self.document?.updateChangeCount(.done)
+        let height = self.heightSlider.value
+        document?.rectangle.height = height
+        previewView.bounds = CGRect(x: 0, y: 0, width: previewView.bounds.size.width, height: CGFloat(height))
+        document?.updateChangeCount(.done)
     }
 }

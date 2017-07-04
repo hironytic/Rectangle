@@ -42,7 +42,17 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKQ-Zo-Mff">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="495"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkg-9v-Qpl">
+                                                <rect key="frame" x="51" y="183" width="240" height="128"/>
+                                                <color key="backgroundColor" red="0.13333333333333333" green="0.59999999999999998" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="hkg-9v-Qpl" firstAttribute="centerX" secondItem="uKQ-Zo-Mff" secondAttribute="centerX" id="PRr-2g-a1y"/>
+                                            <constraint firstItem="hkg-9v-Qpl" firstAttribute="centerY" secondItem="uKQ-Zo-Mff" secondAttribute="centerY" id="ZlZ-T0-Lxb"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YA9-hs-0qf">
                                         <rect key="frame" x="0.0" y="495" width="343" height="108"/>
@@ -53,7 +63,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="V02-hZ-fLZ">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="V02-hZ-fLZ">
                                                 <rect key="frame" x="115.5" y="16" width="229.5" height="31"/>
                                                 <connections>
                                                     <action selector="widthSliderValueChanged:" destination="teM-og-npw" eventType="valueChanged" id="7uc-Vk-hIp"/>
@@ -65,7 +75,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="7Iq-hK-nGE">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="7Iq-hK-nGE">
                                                 <rect key="frame" x="115.5" y="62" width="229.5" height="31"/>
                                                 <connections>
                                                     <action selector="heightSliderValueChanged:" destination="teM-og-npw" eventType="valueChanged" id="Bb9-tj-pLH"/>
@@ -107,6 +117,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="heightSlider" destination="7Iq-hK-nGE" id="K3D-e7-xVZ"/>
+                        <outlet property="previewView" destination="hkg-9v-Qpl" id="Pde-uj-OeT"/>
                         <outlet property="widthSlider" destination="V02-hZ-fLZ" id="scV-f0-YmN"/>
                     </connections>
                 </viewController>
