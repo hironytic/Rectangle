@@ -117,6 +117,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="heightSlider" destination="7Iq-hK-nGE" id="K3D-e7-xVZ"/>
+                        <outlet property="previewAreaView" destination="uKQ-Zo-Mff" id="46a-iM-SvJ"/>
                         <outlet property="previewView" destination="hkg-9v-Qpl" id="Pde-uj-OeT"/>
                         <outlet property="widthSlider" destination="V02-hZ-fLZ" id="scV-f0-YmN"/>
                     </connections>

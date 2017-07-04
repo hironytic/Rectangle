@@ -9,7 +9,9 @@
 import UIKit
 import os.log
 
-class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
+class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate, UIViewControllerTransitioningDelegate {
+    var transitioningController: UIDocumentBrowserTransitionController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +63,16 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
     }
     
+    // MARK: UIViewControllerTransitioningDelegate
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return transitioningController
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return transitioningController
+    }
+    
     // MARK: Document Presentation
     
     func presentDocument(at documentURL: URL) {
@@ -68,6 +80,12 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         let storyBoard = UIStoryboard(name: "Editor", bundle: nil)
         let navViewController = storyBoard.instantiateInitialViewController() as! UINavigationController
         let documentViewController = navViewController.topViewController as! DocumentViewController
+        
+        navViewController.transitioningDelegate = self
+        
+        let transitioningController = transitionController(forDocumentURL: documentURL)
+        transitioningController.targetView = documentViewController.previewAreaView
+        self.transitioningController = transitioningController
         
         documentViewController.setDocument(Document(fileURL: documentURL)) { (success) in
             if success {
