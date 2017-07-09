@@ -18,26 +18,24 @@ class DocumentViewController: UIViewController {
     @IBOutlet weak var heightSlider: UISlider!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         previewView.layer.borderColor = UIColor.black.cgColor
         previewView.layer.borderWidth = 1
-        
-        if let doc = document {
-            // Display the content of the document, e.g.:
-            navigationItem.title = doc.fileURL.lastPathComponent
-            
-            let width = doc.rectangle.width
-            let height = doc.rectangle.height
-            widthSlider.value = width
-            heightSlider.value = height
-        }
-        
-        super.viewDidLoad()
     }
     
     func setDocument(_ document: Document, completion: @escaping (Bool) -> Void) {
         document.open { (success) in
             if success {
                 self.document = document
+                self.loadViewIfNeeded()
+                
+                self.navigationItem.title = document.fileURL.lastPathComponent
+                
+                let width = document.rectangle.width
+                let height = document.rectangle.height
+                self.widthSlider.value = width
+                self.heightSlider.value = height
             }
             completion(success)
         }
